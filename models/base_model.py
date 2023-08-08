@@ -32,19 +32,19 @@ class BaseModel:
 
     def save(self):
         """Update updated_at with the current datetime."""
-    
+
         self.updated_at = datetime.today()
         models.storage.save()
 
     def __str__(self):
         """Returns official string representation"""
-    
+
         return "[{}] ({}) {}".\
                format(type(self).__name__, self.id, self.__dict__)
 
     def to_dict(self):
         """Return dictionary representation of BaseModel class."""
-    
+
         my_dct = dict(self.__dict__)
         my_dct['__class__'] = self.__class__.__name__
         my_dct['updated_at'] = self.updated_at.strftime(
