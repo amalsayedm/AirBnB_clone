@@ -56,3 +56,4 @@ class BaseModel:
             "%Y-%m-%dT%H:%M:%S.%f")
 
         return (my_dct)
+       
