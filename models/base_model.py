@@ -52,4 +52,4 @@ class BaseModel:
         my_dct['created_at'] = self.created_at.strftime(
             "%Y-%m-%dT%H:%M:%S.%f")
 
-        return (cp_dct)
+        return (my_dct)
