@@ -18,7 +18,7 @@ class FileStorage:
 
     def all(self):
         """Return the dictionary __objects."""
-     
+
         return FileStorage.__objects
 
     def new(self, obj):
@@ -39,5 +39,4 @@ class FileStorage:
 
         with open(FileStorage.__file_path, mode='w', encoding="UTF8") as fd:
             json.dump(objects_dict, fd)
-
 
