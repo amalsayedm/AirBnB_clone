@@ -2,7 +2,7 @@
 """Module for FileStorage class."""
 import datetime
 import json
-import models
+
 
 
 class FileStorage:
@@ -37,6 +37,18 @@ class FileStorage:
         for key, val in FileStorage.__objects.items():
             objects_dict[key] = val.to_dict()
 
-        with open(FileStorage.__file_path, mode='w', encoding="UTF8") as fd:
-            json.dump(objects_dict, fd)
+        with open(FileStorage.__file_path, mode='w', encoding="UTF8") as objfile:
+            json.dump(objects_dict, objfile)
 
+    def reload(self):
+
+        try:
+            with open(FileStorage.__file_path, encoding="utf-8") as jsonfile:
+                deserialized = json.load(jsonfile)
+
+                for obj_values in deserialized.values():
+        
+                    self.new(obj_values)
+        except FileNotFoundError:
+            pass
+            
