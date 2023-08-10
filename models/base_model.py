@@ -32,9 +32,8 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new(self)            
+            storage.new(self)        
             
-
     def save(self):
         """Update updated_at with the current datetime."""
         self.updated_at = datetime.now()
@@ -55,6 +54,5 @@ class BaseModel:
             "%Y-%m-%dT%H:%M:%S.%f")
         my_dct['created_at'] = self.created_at.strftime(
             "%Y-%m-%dT%H:%M:%S.%f")
-
+        
         return (my_dct)
-       
