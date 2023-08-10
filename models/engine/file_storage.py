@@ -4,7 +4,6 @@ import datetime
 import json
 
 
-
 class FileStorage:
     """Represent an abstracted storage engine.
 
@@ -36,12 +35,8 @@ class FileStorage:
         objects_dict = {}
         for key, val in FileStorage.__objects.items():
             objects_dict[key] = val.to_dict()
-
-<<<<<<< HEAD
-        with open(FileStorage.__file_path, mode='w', encoding="UTF8") as fd:
-            json.dump(objects_dict, fd)
-=======
-        with open(FileStorage.__file_path, mode='w', encoding="UTF8") as objfile:
+        with open(FileStorage.__file_path, mode='w', encoding="UTF8")
+        as objfile:
             json.dump(objects_dict, objfile)
 
     def reload(self):
@@ -51,9 +46,6 @@ class FileStorage:
                 deserialized = json.load(jsonfile)
 
                 for obj_values in deserialized.values():
-        
                     self.new(obj_values)
         except FileNotFoundError:
             pass
-            
->>>>>>> bd59c92ba25eb7ae3de8ddc8bb925dab3b4250ae
