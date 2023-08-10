@@ -2,7 +2,7 @@
 """Defines the BaseModel class."""
 from uuid import uuid4
 from datetime import datetime
-from models import FileStorage
+import FileStorage
 
 
 class BaseModel:
