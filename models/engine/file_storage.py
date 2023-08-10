@@ -47,7 +47,7 @@ class FileStorage:
 
     def reload(self):
         """reload objects from files(models folder)"""
-  
+
         classes_list = {"BaseModel": BaseModel,
                         "User": User,
                         "State": State,
@@ -57,7 +57,7 @@ class FileStorage:
                         "Review": Review}
         try:
             obj_dict = {}
-            with open(FileStorage.__file_path,'r', encoding="utf-8") as obj_f:
+            with open(FileStorage.__file_path, 'r', encoding="utf-8") as obj_f:
                 obj_dict = json.load(obj_f)
                 for key, val in obj_dict.items():
                     self.all()[key] = classes_list[val['__class__']](**val)
