@@ -3,7 +3,6 @@
 import models
 from uuid import uuid4
 from datetime import datetime
-#from models import FileStorage
 
 
 class BaseModel:
@@ -34,7 +33,7 @@ class BaseModel:
         """Returns official string representation"""
         cself = (str(type(self)).split('.')[-1]).split('\'')[0]
         return "[{}] ({}) {}".format(cself, self.id, self.__dict__)
-        
+
     def save(self):
         """Update updated_at with the current datetime."""
         self.updated_at = datetime.now()
@@ -44,7 +43,7 @@ class BaseModel:
         """Return dictionary representation of BaseModel class."""
         my_dct = {}
         my_dct.update(self.__dict__)
-        my_dct.update({'__class__' :
+        my_dct.update({'__class__':
                       (str(type(self)).split('.')[-1]).split('\'')[0]})
         my_dct['updated_at'] = self.updated_at.strftime(
             "%Y-%m-%dT%H:%M:%S.%f")
