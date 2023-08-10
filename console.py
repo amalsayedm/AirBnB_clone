@@ -12,19 +12,19 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
   """Contains the entry point of the command interpreter."""
+  prompt = "(hbnb) "
   
-   prompt = "(hbnb) "
-
   def do_quit(self, args):
     """Quit command to exit the program."""
     return True
-
- def do_EOF(self, args):
-   """Ending char handler."""
-   print()
-   return True
+    
+  def do_EOF(self, args):
+    """Ending char handler."""
+    print()
+    return True
 
  def emptyline(self):
    """shouldn’t execute anything"""
