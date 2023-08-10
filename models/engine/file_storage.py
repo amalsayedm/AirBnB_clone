@@ -2,6 +2,13 @@
 """Module for FileStorage class."""
 import datetime
 import json
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class FileStorage:
@@ -31,21 +38,28 @@ class FileStorage:
 
     def save(self):
         """Serializes __objects attribute to JSON file."""
-
-        objects_dict = {}
-        for key, val in FileStorage.__objects.items():
-            objects_dict[key] = val.to_dict()
-        with open(FileStorage.__file_path, mode='w', encoding="UTF8")
-        as objfile:
-            json.dump(objects_dict, objfile)
+        with open(FileStorage.__file_path, 'w', encoding="UTF8") as obj_f:
+            obj_dict = {}
+            obj_dict.update(FileStorage.__objects)
+            for key, val in obj_dict.items():
+                obj_dict[key] = val.to_dict()
+            json.dump(obj_dict, obj_f)
 
     def reload(self):
-
+        """reload objects from files(models folder)"""
+        
+        classes_list = {"BaseModel": BaseModel,
+                        "User": User,
+                        "State": State,
+                        "City": City,
+                        "Amenity": Amenity,
+                        "Place": Place,
+                        "Review": Review}
         try:
-            with open(FileStorage.__file_path, encoding="utf-8") as jsonfile:
-                deserialized = json.load(jsonfile)
-
-                for obj_values in deserialized.values():
-                    self.new(obj_values)
+            obj_dict = {}
+            with open(FileStorage.__file_pat.,'r', encoding="utf-8") as obj_f:
+                obj_dict = json.load(obj_f)
+               for key, val in obj_dict.items():
+                   self.all()[key] = classes_list[val['__class__']](**val)
         except FileNotFoundError:
             pass
