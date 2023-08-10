@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Place class model"""
-
 from models.base_model import BaseModel
 
 

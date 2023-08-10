@@ -6,7 +6,6 @@ from datetime import datetime
 from models import storage
 
 
-
 class BaseModel:
     """Represents the BaseModel of the HBnB project."""
 
@@ -28,6 +27,7 @@ class BaseModel:
                         kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
                 elif key == "id":
                     self.id =  kwargs["id"]
+
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
@@ -58,5 +58,5 @@ class BaseModel:
             "%Y-%m-%dT%H:%M:%S.%f")
         my_dct['created_at'] = self.created_at.strftime(
             "%Y-%m-%dT%H:%M:%S.%f")
-        
+ 
         return (my_dct)
