@@ -39,4 +39,3 @@ class FileStorage:
 
         with open(FileStorage.__file_path, mode='w', encoding="UTF8") as fd:
             json.dump(objects_dict, fd)
-
