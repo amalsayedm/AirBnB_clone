@@ -32,12 +32,8 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-<<<<<<< HEAD
-
-=======
             storage.new(self)
             
->>>>>>> bd59c92ba25eb7ae3de8ddc8bb925dab3b4250ae
     def save(self):
         """Update updated_at with the current datetime."""
         self.updated_at = datetime.now()
