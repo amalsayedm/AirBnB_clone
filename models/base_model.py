@@ -3,6 +3,8 @@
 import models
 from uuid import uuid4
 from datetime import datetime
+from models import storage
+
 
 
 class BaseModel:
@@ -24,19 +26,22 @@ class BaseModel:
                 elif key == "updated_at":
                     self.__dict__["updated_at"] = datetime.strptime(
                         kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
-                else:
-                    self.id = str(uuid4())
-                    self.created_at = datetime.now()
-                    self.updated_at = datetime.now()
+                elif key == "id":
+                    self.id =  kwargs["id"]
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+<<<<<<< HEAD
 
+=======
+            storage.new(self)
+            
+>>>>>>> bd59c92ba25eb7ae3de8ddc8bb925dab3b4250ae
     def save(self):
         """Update updated_at with the current datetime."""
-
-        self.updated_at = datetime.today()
+        self.updated_at = datetime.now()
+        storage.save()
 
     def __str__(self):
         """Returns official string representation"""
@@ -53,5 +58,5 @@ class BaseModel:
             "%Y-%m-%dT%H:%M:%S.%f")
         my_dct['created_at'] = self.created_at.strftime(
             "%Y-%m-%dT%H:%M:%S.%f")
-
+        
         return (my_dct)
