@@ -4,13 +4,14 @@
 import unittest
 from datetime import datetime
 import time
-from models.amenity import Amenity
+#from models.amenity import Amenity
 import re
 import json
-from models.engine.file_storage import FileStorage
+#from models.engine.file_storage import FileStorage
 import os
-from models import storage
-from models.base_model import BaseModel
+#from models import storage
+#from models.base_model import BaseModel
+import models
 
 
 class TestAmenity(unittest.TestCase):
@@ -28,22 +29,22 @@ class TestAmenity(unittest.TestCase):
 
     def resetStorage(self):
         """Resets FileStorage data."""
-        FileStorage._FileStorage__objects = {}
-        if os.path.isfile(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
+        models.FileStorage._FileStorage__objects = {}
+        if os.path.isfile(models.FileStorage._FileStorage__file_path):
+            os.remove(models.FileStorage._FileStorage__file_path)
 
     def test_8_instantiation(self):
         """Tests instantiation of Amenity class."""
 
-        b = Amenity()
+        b = models.Amenity()
         self.assertEqual(str(type(b)), "<class 'models.amenity.Amenity'>")
         self.assertIsInstance(b, Amenity)
         self.assertTrue(issubclass(type(b), BaseModel))
 
     def test_8_attributes(self):
         """Tests the attributes of Amenity class."""
-        attributes = storage.attributes()["Amenity"]
-        o = Amenity()
+        attributes = models.storage.attributes()["Amenity"]
+        o = models.Amenity()
         for k, v in attributes.items():
             self.assertTrue(hasattr(o, k))
             self.assertEqual(type(getattr(o, k, None)), v)
