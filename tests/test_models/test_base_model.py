@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 """All the test for the base_model"""
-from models import storage
-from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
-from datetime import datetime
+#from models import storage
+#from models.base_model import BaseModel
+#from models.engine.file_storage import FileStorage
+#from datetime import datetime
+import models
 import json
 import os
 import re
