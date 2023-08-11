@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """All the test for the base_model"""
 import unittest
+import models
 from models.base_model import BaseModel
 from io import StringIO
 import sys
