@@ -16,13 +16,20 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     """Contains the entry point of the command interpreter."""
     prompt = "(hbnb) "
-    classes_names = { 'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review}
+    classes_names = {'BaseModel': BaseModel,
+                     'User': User,
+                     'Place': Place,
+                     'State': State,
+                     'City': City,
+                     'Amenity': Amenity,
+                     'Review': Review}
     types = {
-             'number_rooms': int, 'number_bathrooms': int,
-             'max_guest': int, 'price_by_night': int,
-             'latitude': float, 'longitude': float
+             'number_rooms': int,
+            'number_bathrooms': int,
+            'max_guest': int,
+            'price_by_night': int,
+            'latitude': float,
+            'longitude': float
             }
 
     def do_quit(self, args):
