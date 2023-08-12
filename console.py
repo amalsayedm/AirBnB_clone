@@ -119,6 +119,7 @@ class HBNBCommand(cmd.Cmd):
         new_object = HBNBCommand.classes_names[args]()
         storage.save()
         print(new_object.id)
+        storage.save()#1
 
     def do_show(self, args):
         """ Method to show an individual object """
@@ -186,11 +187,13 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes_names:
                 print("** class doesn't exist **")
                 return
-            for key, val in storage.all().items():
+            for key, val in storage._FileStorage__objects.items():
+            #for key, val in storage.all().items():
                 if key.split('.')[0] == args:
                     print_list.append(str(val))
         else:
-            for key, val in storage.all().items():
+            for key, val in storage._FileStorage__objects.items():
+            #for key, val in storage.all().items():
                 print_list.append(str(val))
 
         print(print_list)
@@ -248,12 +251,32 @@ class HBNBCommand(cmd.Cmd):
 
             if not attribute_val and args[2]:
                 attribute_val = args[2].partition(' ')[0]
-
-            data = [attribute_name, attribute_val]
+                
+            args = [ attribute_name, attribute_val]
+            #data = [attribute_name, attribute_val]
 
         dict = storage.all()[key]
 
-        for i, attribute_name in enumerate(data):
+          for i, attribute_name in enumerate(args):
+            # block only runs on even iterations
+            if (i % 2 == 0):
+                attribute_val = args[i + 1]  # following item is value
+                if not attribute_name:  # check for att_name
+                    print("** attribute name missing **")
+                    return
+                if not attribute_val:  # check for att_value
+                    print("** value missing **")
+                    return
+                # type cast as necessary
+                if attribute_name in HBNBCommand.types:
+                    attribute_val = HBNBCommand.types[attribute_name](attribute_val)
+
+                # update dictionary with name, value pair
+                dict.__dict__.update({attribute_name: attribute_val})
+
+        dict.save()  # save updates to file
+
+        """for i, attribute_name in enumerate(data):
             # block only runs on even iterations
             if (i % 2 == 0):
                 att_val = data[i + 1]  # following item is value
@@ -271,6 +294,7 @@ class HBNBCommand(cmd.Cmd):
                 dict.__dict__.update({attribute_name: att_val})
 
         storage.save()  # save updates to jason file
+        """
 
     def do_count(self, args):
         """Count current number of class instances"""
