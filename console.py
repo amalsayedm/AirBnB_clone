@@ -330,9 +330,9 @@ class HBNBCommand(cmd.Cmd):
         elif mthname == 'count':
             print(self.count_class(class_name))
         elif mthname == 'show':
-            self.do_show(clsname + " " + args.strip('"'))
+            self.do_show(class_name + " " + args.strip('"'))
         elif mthname == 'destroy':
-            self.do_destroy(clsname + " " + args.strip('"'))
+            self.do_destroy(class_name + " " + args.strip('"'))
         elif mthname == 'update':
             lb, rb = args.find('{'), args.find('}')
             d = None
