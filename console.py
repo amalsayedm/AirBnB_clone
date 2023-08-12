@@ -25,6 +25,7 @@ class HBNBCommand(cmd.Cmd):
              'latitude': float, 'longitude': float
             }
     advancec_commands = ['all', 'count', 'show', 'destroy', 'update']
+
     def do_quit(self, args):
         """Quit command to exit the program."""
         return True
@@ -239,6 +240,7 @@ class HBNBCommand(cmd.Cmd):
             pass
         finally:
             return line
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
