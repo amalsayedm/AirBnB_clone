@@ -119,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
         new_object = HBNBCommand.classes_names[args]()
         storage.save()
         print(new_object.id)
-        storage.save()#1
+        storage.save() # 1
 
     def do_show(self, args):
         """ Method to show an individual object """
@@ -188,12 +188,12 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
             for key, val in storage._FileStorage__objects.items():
-            #for key, val in storage.all().items():
+            # for key, val in storage.all().items():
                 if key.split('.')[0] == args:
                     print_list.append(str(val))
         else:
             for key, val in storage._FileStorage__objects.items():
-            #for key, val in storage.all().items():
+            # for key, val in storage.all().items():
                 print_list.append(str(val))
 
         print(print_list)
@@ -251,13 +251,13 @@ class HBNBCommand(cmd.Cmd):
 
             if not attribute_val and args[2]:
                 attribute_val = args[2].partition(' ')[0]
-                
-            args = [ attribute_name, attribute_val]
-            #data = [attribute_name, attribute_val]
+  
+            args = [attribute_name, attribute_val]
+            # data = [attribute_name, attribute_val]
 
         dict = storage.all()[key]
 
-          for i, attribute_name in enumerate(args):
+        for i, attribute_name in enumerate(args):
             # block only runs on even iterations
             if (i % 2 == 0):
                 attribute_val = args[i + 1]  # following item is value
@@ -269,7 +269,8 @@ class HBNBCommand(cmd.Cmd):
                     return
                 # type cast as necessary
                 if attribute_name in HBNBCommand.types:
-                    attribute_val = HBNBCommand.types[attribute_name](attribute_val)
+                    attribute_val = HBNBCommand.types[
+                    attribute_name](attribute_val)
 
                 # update dictionary with name, value pair
                 dict.__dict__.update({attribute_name: attribute_val})
