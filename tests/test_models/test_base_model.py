@@ -12,13 +12,7 @@ class test_basemodel(unittest.TestCase):
     """ """
 
     def __init__(self, *args, **kwargs):
-           """Initializes instance attributes
-
-         Args:
-            *args: list of arguments
-             **kwargs: dict of key-values arguments
-        """
-
+        """ """
         super().__init__(*args, **kwargs)
         self.name = 'BaseModel'
         self.value = BaseModel
