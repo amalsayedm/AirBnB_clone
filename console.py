@@ -23,14 +23,12 @@ class HBNBCommand(cmd.Cmd):
                      'City': City,
                      'Amenity': Amenity,
                      'Review': Review}
-    types = {
-             'number_rooms': int,
-            'number_bathrooms': int,
-            'max_guest': int,
-            'price_by_night': int,
-            'latitude': float,
-            'longitude': float
-            }
+    types = {'number_rooms': int,
+             'number_bathrooms': int,
+             'max_guest': int,
+             'price_by_night': int,
+             'latitude': float,
+             'longitude': float}
 
     def do_quit(self, args):
         """Quit command to exit the program."""
@@ -84,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
             print(storage._FileStorage__objects[key])
         except KeyError:
             print("** no instance found **")
-    
+
     def do_destroy(self, args):
         """ Destroys a specified object """
         new_args = args.partition(" ")
@@ -93,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
 
         if class_id and ' ' in class_id:
             class_id = class_id.partition(' ')[0]
-       
+
         if not class_name:
             print("** class name missing **")
             return
@@ -113,8 +111,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         except KeyError:
             print("** no instance found **")
-    
-    
+            
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
@@ -140,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
         args = args.partition(" ")
         if args[0]:
             class_name = args[0]
-        else:  
+        else:
             print("** class name missing **")
             return
         if class_name not in HBNBCommand.classes_names:
