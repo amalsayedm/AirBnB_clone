@@ -8,8 +8,7 @@ import os
 
 class test_fileStorage(unittest.TestCase):
     """ Class to test the file storage method """
-    
-    
+
     def setUp(self):
         """ Set up test environment """
         del_list = []
@@ -18,7 +17,6 @@ class test_fileStorage(unittest.TestCase):
         for key in del_list:
             del storage._FileStorage__objects[key]
 
-    
     def tearDown(self):
         """ Remove storage file at end of tests """
         try:
