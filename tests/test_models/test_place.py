@@ -14,7 +14,7 @@ class test_Place(test_basemodel):
             *args: list of arguments
              **kwargs: dict of key-values arguments
         """
-        
+    
         super().__init__(*args, **kwargs)
         self.name = "Place"
         self.value = Place
