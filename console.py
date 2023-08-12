@@ -16,20 +16,14 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     """Contains the entry point of the command interpreter."""
     prompt = "(hbnb) "
-
-    classes_names = {'BaseModel': BaseModel,
-                     'User': User,
-                     'Place': Place,
-                     'State': State,
-                     'City': City,
-                     'Amenity': Amenity,
-                     'Review': Review}
-    types = {'number_rooms': int,
-             'number_bathrooms': int,
-             'max_guest': int,
-             'price_by_night': int,
-             'latitude': float,
-             'longitude': float}
+    classes_names = { 'BaseModel': BaseModel, 'User': User, 'Place': Place,
+               'State': State, 'City': City, 'Amenity': Amenity,
+               'Review': Review}
+    types = {
+             'number_rooms': int, 'number_bathrooms': int,
+             'max_guest': int, 'price_by_night': int,
+             'latitude': float, 'longitude': float
+            }
 
     def do_quit(self, args):
         """Quit command to exit the program."""
@@ -83,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
             print(storage._FileStorage__objects[key])
         except KeyError:
             print("** no instance found **")
-
+    
     def do_destroy(self, args):
         """ Destroys a specified object """
         new_args = args.partition(" ")
@@ -92,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
 
         if class_id and ' ' in class_id:
             class_id = class_id.partition(' ')[0]
-
+       
         if not class_name:
             print("** class name missing **")
             return
@@ -112,7 +106,8 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
         except KeyError:
             print("** no instance found **")
-
+    
+    
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
@@ -138,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
         args = args.partition(" ")
         if args[0]:
             class_name = args[0]
-        else:
+        else:  
             print("** class name missing **")
             return
         if class_name not in HBNBCommand.classes_names:
@@ -185,30 +180,29 @@ class HBNBCommand(cmd.Cmd):
             if not attribute_val and args[2]:
                 attribute_val = args[2].partition(' ')[0]
 
-            args = [attribute_name, attribute_val]
+            data = [attribute_name, attribute_val]
 
         dict = storage.all()[key]
 
-        for i, attribute_name in enumerate(args):
+        for i, attribute_name in enumerate(data):
             # block only runs on even iterations
             if (i % 2 == 0):
-                attribute_val = args[i + 1]  # following item is value
+                att_val = data[i + 1]  # following item is value
                 if not attribute_name:  # check for att_name
                     print("** attribute name missing **")
                     return
-                if not attribute_val:  # check for att_value
+                if not att_val:
                     print("** value missing **")
                     return
                 # type cast as necessary
                 if attribute_name in HBNBCommand.types:
-                    attribute_val = HBNBCommand.types
-                    [attribute_name](attribute_val)
+                    att_val = HBNBCommand.types[attribute_name](att_val)
 
-                # update dictionary with name, value pair
-                dict.__dict__.update({attribute_name: attribute_val})
+                # update dictionary
+                dict.__dict__.update({attribute_name: att_val})
 
-        dict.save()  # save updates to file
+        storage.save()  # save updates to jason file
 
-   
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
