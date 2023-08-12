@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
              'max_guest': int, 'price_by_night': int,
              'latitude': float, 'longitude': float
             }
-
+    advancec_commands = ['all', 'count', 'show', 'destroy', 'update']
     def do_quit(self, args):
         """Quit command to exit the program."""
         return True
@@ -205,11 +205,40 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
-        for key, val in storage._FileStorage__objects.items():
+        for key, val in storage.all().items():
             if args == key.split('.')[0]:
                 count += 1
         print(count)
 
+    def precmd(self, line):
+        """manuiplate commands for advanced command syntax.
+
+        Usage: <class name>.<command>([<id> [<*args> or <**kwargs>]])
+        (Brackets denote optional fields in usage example.)
+        """
+        id = ''
+        args = ''
+
+        # check commands conatains '.', '(', ')'
+        if not ('.' in line and '(' in line and ')' in line):
+            return line
+
+        try:
+            newline = line[:]
+
+            # get <class name>
+            _class = newline[:newline.find('.')]
+
+            # get and validate <command>
+            command = newline[newline.find('.') + 1:newline.find('(')]
+            if command not in HBNBCommand.advancec_commands:
+                raise Exception
+            line = ' '.join([command, _class, id, args])
+
+        except Exception as mess:
+            pass
+        finally:
+            return line
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
