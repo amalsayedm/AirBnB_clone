@@ -16,7 +16,7 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """Contains the entry point of the command interpreter."""
-    prompt = "(hbnb) " if sys.__stdin__.isatty() else " "
+    prompt = "(hbnb) " # if sys.__stdin__.isatty() else " "
 
     classes_names = {'BaseModel': BaseModel,
                      'User': User,
@@ -31,8 +31,9 @@ class HBNBCommand(cmd.Cmd):
              'price_by_night': int,
              'latitude': float,
              'longitude': float}
-    dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
+    # dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
 
+    '''
     def preloop(self):
         """Prints if isatty is false"""
         if not sys.__stdin__.isatty():
@@ -94,6 +95,7 @@ class HBNBCommand(cmd.Cmd):
         if not sys.__stdin__.isatty():
             print('(hbnb) ', end='')
         return stop
+        '''
 
     def do_quit(self, args):
         """Quit command to exit the program."""
@@ -296,7 +298,7 @@ class HBNBCommand(cmd.Cmd):
 
         storage.save()  # save updates to jason file
         """
-
+'''
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
@@ -304,6 +306,80 @@ class HBNBCommand(cmd.Cmd):
             if args == key.split('.')[0]:
                 count += 1
         print(count)
+'''
+     def default(self, line):
+        """handle class commands"""
+        l = line.split('.', 1)
+        if len(l) < 2:
+            print('*** Unknown syntax:', l[0])
+            return False
+        class_name, line = l[0], l[1]
+        if class_name not in list(self.classes_names.keys()):
+            print('*** Unknown syntax: {}.{}'.format(class_name, line))
+            return False
+        l = line.split('(', 1)
+        if len(l) < 2:
+            print('*** Unknown syntax: {}.{}'.format(class_name, l[0]))
+            return False
+        mthname, args = l[0], l[1].rstrip(')')
+        if mthname not in ['all', 'count', 'show', 'destroy', 'update']:
+            print('*** Unknown syntax: {}.{}'.format(class_name, line))
+            return False
+        if mthname == 'all':
+            self.do_all(class_name)
+        elif mthname == 'count':
+            print(self.count_class(class_name))
+        elif mthname == 'show':
+            self.do_show(clsname + " " + args.strip('"'))
+        elif mthname == 'destroy':
+            self.do_destroy(clsname + " " + args.strip('"'))
+        elif mthname == 'update':
+            lb, rb = args.find('{'), args.find('}')
+            d = None
+            if args[lb:rb + 1] != '':
+                d = eval(args[lb:rb + 1])
+            l = args.split(',', 1)
+            objid, args = l[0].strip('"'), l[1]
+            if d and type(d) is dict:
+                self.handle_dict(class_name, objid, d)
+            else:
+                from shlex import shlex
+                args = args.replace(',', ' ', 1)
+                l = list(shlex(args))
+                l[0] = l[0].strip('"')
+                self.do_update(" ".join([class_name, objid, l[0], l[1]]))
+
+    def handle_dict(self, class_name, objid, d):
+        """handle dictionary update"""
+        for key, val in d.items():
+            self.do_update(" ".join([class_name, objid, str(key), str(val)]))
+
+    def postloop(self):
+        """print new line after each loop"""
+        print()
+
+    @staticmethod
+    def count_class(clsname):
+        """count number of objects of type clsname"""
+        c = 0
+        for key, val in models.storage.all().items():
+            if type(val).__name__ == class_name:
+                c += 1
+        return (c)
+
+    @staticmethod
+    def getType(attribute_val):
+        """return the type of the input string"""
+        try:
+            int(attribute_val)
+            return (int)
+        except ValueError:
+            pass
+        try:
+            float(attrval)
+            return (float)
+        except ValueError:
+            return (str)
 
 
 if __name__ == '__main__':
