@@ -202,6 +202,14 @@ class HBNBCommand(cmd.Cmd):
 
         storage.save()  # save updates to jason file
 
+    def do_count(self, args):
+        """Count current number of class instances"""
+        count = 0
+        for key, val in storage._FileStorage__objects.items():
+            if args == key.split('.')[0]:
+                count += 1
+        print(count)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
