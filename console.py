@@ -16,7 +16,7 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """Contains the entry point of the command interpreter."""
-    prompt = "(hbnb) " # if sys.__stdin__.isatty() else " "
+    prompt = "(hbnb) "  # if sys.__stdin__.isatty() else " "
 
     classes_names = {'BaseModel': BaseModel,
                      'User': User,
@@ -121,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
         new_object = HBNBCommand.classes_names[args]()
         storage.save()
         print(new_object.id)
-        storage.save() # 1
+        storage.save()  # 1
 
     def do_show(self, args):
         """ Method to show an individual object """
@@ -190,12 +190,12 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
             for key, val in storage._FileStorage__objects.items():
-            # for key, val in storage.all().items():
+            """for key, val in storage.all().items():"""
                 if key.split('.')[0] == args:
                     print_list.append(str(val))
         else:
             for key, val in storage._FileStorage__objects.items():
-            # for key, val in storage.all().items():
+            """for key, val in storage.all().items():"""
                 print_list.append(str(val))
 
         print(print_list)
@@ -253,7 +253,7 @@ class HBNBCommand(cmd.Cmd):
 
             if not attribute_val and args[2]:
                 attribute_val = args[2].partition(' ')[0]
-  
+
             args = [attribute_name, attribute_val]
             # data = [attribute_name, attribute_val]
 
@@ -271,8 +271,8 @@ class HBNBCommand(cmd.Cmd):
                     return
                 # type cast as necessary
                 if attribute_name in HBNBCommand.types:
-                    attribute_val = HBNBCommand.types[
-                    attribute_name](attribute_val)
+                    attribute_val = HBNBCommand.types
+                    [attribute_name](attribute_val)
 
                 # update dictionary with name, value pair
                 dict.__dict__.update({attribute_name: attribute_val})
@@ -298,7 +298,7 @@ class HBNBCommand(cmd.Cmd):
 
         storage.save()  # save updates to jason file
         """
-'''
+    '''
     def do_count(self, args):
         """Count current number of class instances"""
         count = 0
@@ -306,19 +306,19 @@ class HBNBCommand(cmd.Cmd):
             if args == key.split('.')[0]:
                 count += 1
         print(count)
-'''
+    '''
     def default(self, line):
         """handle class commands"""
-        l = line.split('.', 1)
-        if len(l) < 2:
-            print('*** Unknown syntax:', l[0])
+        li = line.split('.', 1)
+        if len(li) < 2:
+            print('*** Unknown syntax:', li[0])
             return False
-        class_name, line = l[0], l[1]
+        class_name, line = li[0], li[1]
         if class_name not in list(self.classes_names.keys()):
             print('*** Unknown syntax: {}.{}'.format(class_name, line))
             return False
-        l = line.split('(', 1)
-        if len(l) < 2:
+        li = line.split('(', 1)
+        if len(li) < 2:
             print('*** Unknown syntax: {}.{}'.format(class_name, l[0]))
             return False
         mthname, args = l[0], l[1].rstrip(')')
@@ -339,15 +339,15 @@ class HBNBCommand(cmd.Cmd):
             if args[lb:rb + 1] != '':
                 d = eval(args[lb:rb + 1])
             l = args.split(',', 1)
-            objid, args = l[0].strip('"'), l[1]
+            objid, args = li[0].strip('"'), li[1]
             if d and type(d) is dict:
                 self.handle_dict(class_name, objid, d)
             else:
                 from shlex import shlex
                 args = args.replace(',', ' ', 1)
-                l = list(shlex(args))
-                l[0] = l[0].strip('"')
-                self.do_update(" ".join([class_name, objid, l[0], l[1]]))
+                li = list(shlex(args))
+                li[0] = l[0].strip('"')
+                self.do_update(" ".join([class_name, objid, li[0], li[1]]))
 
     def handle_dict(self, class_name, objid, d):
         """handle dictionary update"""
