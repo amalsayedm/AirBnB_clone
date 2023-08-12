@@ -321,7 +321,7 @@ class HBNBCommand(cmd.Cmd):
         if len(li) < 2:
             print('*** Unknown syntax: {}.{}'.format(class_name, l[0]))
             return False
-        mthname, args = l[0], l[1].rstrip(')')
+        mthname, args = li[0], li[1].rstrip(')')
         if mthname not in ['all', 'count', 'show', 'destroy', 'update']:
             print('*** Unknown syntax: {}.{}'.format(class_name, line))
             return False
