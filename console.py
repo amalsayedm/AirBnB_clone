@@ -15,7 +15,7 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """Contains the entry point of the command interpreter."""
-    prompt = "(hbnb) " if sys.__stdin__.isatty() else " "
+    prompt = "(hbnb) " #if sys.__stdin__.isatty() else " "
 
     classes_names = {'BaseModel': BaseModel,
                      'User': User,
