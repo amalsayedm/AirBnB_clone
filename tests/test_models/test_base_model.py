@@ -22,9 +22,9 @@ class test_basemodel(unittest.TestCase):
         self.name = 'BaseModel'
         self.value = BaseModel
 
-    #def setUp(self):
-     #   """ """
-        #pass
+    def setUp(self):
+        """ """
+        pass
 
     def tearDown(self):
         try:
