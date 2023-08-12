@@ -189,13 +189,13 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes_names:
                 print("** class doesn't exist **")
                 return
-            for key, val in storage._FileStorage__objects.items():
             """for key, val in storage.all().items():"""
+            for key, val in storage._FileStorage__objects.items():
                 if key.split('.')[0] == args:
                     print_list.append(str(val))
         else:
-            for key, val in storage._FileStorage__objects.items():
             """for key, val in storage.all().items():"""
+            for key, val in storage._FileStorage__objects.items():
                 print_list.append(str(val))
 
         print(print_list)
@@ -338,7 +338,7 @@ class HBNBCommand(cmd.Cmd):
             d = None
             if args[lb:rb + 1] != '':
                 d = eval(args[lb:rb + 1])
-            l = args.split(',', 1)
+            li = args.split(',', 1)
             objid, args = li[0].strip('"'), li[1]
             if d and type(d) is dict:
                 self.handle_dict(class_name, objid, d)
