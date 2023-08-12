@@ -9,7 +9,12 @@ import os
 
 
 class test_basemodel(unittest.TestCase):
-    """ """
+    """Initializes instance attributes
+
+         Args:
+            *args: list of arguments
+             **kwargs: dict of key-values arguments
+        """
 
     def __init__(self, *args, **kwargs):
         """ """
@@ -17,9 +22,9 @@ class test_basemodel(unittest.TestCase):
         self.name = 'BaseModel'
         self.value = BaseModel
 
-    def setUp(self):
-        """ """
-        pass
+    #def setUp(self):
+     #   """ """
+        #pass
 
     def tearDown(self):
         try:
@@ -29,56 +34,56 @@ class test_basemodel(unittest.TestCase):
 
     def test_default(self):
         """ """
-        i = self.value()
+        me = self.value()
         self.assertEqual(type(i), self.value)
 
     def test_kwargs(self):
         """ """
-        i = self.value()
-        copy = i.to_dict()
+        me = self.value()
+        copy = me.to_dict()
         new = BaseModel(**copy)
-        self.assertFalse(new is i)
+        self.assertFalse(new is me)
 
     def test_kwargs_int(self):
         """ """
-        i = self.value()
-        copy = i.to_dict()
+        me = self.value()
+        copy = me.to_dict()
         copy.update({1: 2})
         with self.assertRaises(TypeError):
             new = BaseModel(**copy)
 
     def test_save(self):
         """ Testing save """
-        i = self.value()
-        i.save()
-        key = self.name + "." + i.id
+        me = self.value()
+        me.save()
+        key = self.name + "." + me.id
         with open('file.json', 'r') as f:
-            j = json.load(f)
-            self.assertEqual(j[key], i.to_dict())
+            js = json.load(f)
+            self.assertEqual(js[key], me.to_dict())
 
     def test_str(self):
         """ """
-        i = self.value()
-        self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
-                         i.__dict__))
+        me = self.value()
+        self.assertEqual(str(me), '[{}] ({}) {}'.format(self.name, me.id,
+                         me.__dict__))
 
     def test_todict(self):
         """ """
-        i = self.value()
-        n = i.to_dict()
-        self.assertEqual(i.to_dict(), n)
+        me = self.value()
+        ne = me.to_dict()
+        self.assertEqual(me.to_dict(), ne)
 
     def test_kwargs_none(self):
         """ """
-        n = {None: None}
+        nl= {None: None}
         with self.assertRaises(TypeError):
-            new = self.value(**n)
+            new = self.value(**nl)
 
     def test_kwargs_one(self):
         """ """
-        n = {'Name': 'test'}
+        nl = {'Name': 'test'}
         with self.assertRaises(KeyError):
-            new = self.value(**n)
+            new = self.value(**nl)
 
     def test_id(self):
         """ """
@@ -94,6 +99,6 @@ class test_basemodel(unittest.TestCase):
         """ """
         new = self.value()
         self.assertEqual(type(new.updated_at), datetime.datetime)
-        n = new.to_dict()
-        new = BaseModel(**n)
+        nl = new.to_dict()
+        new = BaseModel(**nl)
         self.assertFalse(new.created_at == new.updated_at)
