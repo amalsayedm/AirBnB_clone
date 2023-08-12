@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
              'price_by_night': int,
              'latitude': float,
              'longitude': float}
-     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
+    dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
 
     def preloop(self):
         """Prints if isatty is false"""
@@ -270,9 +270,6 @@ class HBNBCommand(cmd.Cmd):
                 dict.__dict__.update({attribute_name: att_val})
 
         storage.save()  # save updates to jason file
-
-    
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
