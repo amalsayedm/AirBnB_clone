@@ -307,7 +307,7 @@ class HBNBCommand(cmd.Cmd):
                 count += 1
         print(count)
 '''
-     def default(self, line):
+    def default(self, line):
         """handle class commands"""
         l = line.split('.', 1)
         if len(l) < 2:
