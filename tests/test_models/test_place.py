@@ -8,13 +8,7 @@ class test_Place(test_basemodel):
     """testing place class"""
 
     def __init__(self, *args, **kwargs):
-           """Initializes instance attributes
-
-         Args:
-            *args: list of arguments
-             **kwargs: dict of key-values arguments
-        """
-    
+       """ """
         super().__init__(*args, **kwargs)
         self.name = "Place"
         self.value = Place
