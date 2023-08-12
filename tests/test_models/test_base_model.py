@@ -9,37 +9,16 @@ import os
 
 
 class test_basemodel(unittest.TestCase):
-    """Initializes instance attributes
+    """ """
+
+    def __init__(self, *args, **kwargs):
+           """Initializes instance attributes
 
          Args:
             *args: list of arguments
              **kwargs: dict of key-values arguments
         """
 
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = 'BaseModel'
-        self.value = BaseModel
-
-    def setUp(self):
-        """ """
-        pass
-#!/usr/bin/python3
-""" """
-from models.base_model import BaseModel
-import unittest
-import datetime
-from uuid import UUID
-import json
-import os
-
-
-class test_basemodel(unittest.TestCase):
-    """ """
-
-    def __init__(self, *args, **kwargs):
-        """ """
         super().__init__(*args, **kwargs)
         self.name = 'BaseModel'
         self.value = BaseModel
