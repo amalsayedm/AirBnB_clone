@@ -6,17 +6,13 @@ from models.place import Place
 
 class test_Place(test_basemodel):
     """testing place class"""
-
-
     def __init__(self, *args, **kwargs):
         """ """
         super().__init__(*args, **kwargs)
         self.name = "Place"
         self.value = Place
-
-
+        
     """atributes tests"""
-
     def test_city_id(self):
         """ city id -> string"""
         new = self.value()
