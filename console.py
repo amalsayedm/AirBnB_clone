@@ -359,10 +359,10 @@ class HBNBCommand(cmd.Cmd):
         print()
 
     @staticmethod
-    def count_class(clsname):
+    def count_class(class_name):
         """count number of objects of type clsname"""
         c = 0
-        for key, val in models.storage.all().items():
+        for key, val in storage.all().items():
             if type(val).__name__ == class_name:
                 c += 1
         return (c)
