@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
              'price_by_night': int,
              'latitude': float,
              'longitude': float}
-     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
+     #dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
 
     def preloop(self):
         """Prints if isatty is false"""
